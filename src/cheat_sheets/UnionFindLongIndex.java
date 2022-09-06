@@ -1,4 +1,4 @@
-package dataStructure;
+package cheat_sheets;
 
 import java.util.*;
 

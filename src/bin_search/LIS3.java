@@ -3,6 +3,7 @@ package bin_search;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * - LIS.
@@ -16,39 +17,27 @@ public class LIS3 {
     static final ArrayList<Integer> lis = new ArrayList<>();
 
     static void solution() {
-        lis.add(-1);
+        lis.add(arr[0]);
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             if (arr[i] > lis.get(lis.size() - 1)) {
                 lis.add(arr[i]);
             } else{
                 int index = lowerBound(arr[i]);
-                lis.set(index, arr[i]);
+                lis.set(index + 1, arr[i]);
             }
         }
 
-        ans = lis.size() - 1;
+        ans = lis.size();
     }
 
     static int lowerBound(int value) {
-        int left = 0;
-        int right = lis.size() - 1;
-
-        return binSearch(left, right, value);
-    }
-
-    static int binSearch(int left, int right, int value) {
-        while (left < right) {
-            int mid = (left + right) / 2;
-
-            if (lis.get(mid) >= value) {
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
+        int index = Collections.binarySearch(lis, value);
+        if (index >= 0) {
+            return index;
+        } else {
+            return -1 - index;
         }
-
-        return right;
     }
 
     public static void main(String[] args) throws IOException {

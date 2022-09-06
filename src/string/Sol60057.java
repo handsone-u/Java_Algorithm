@@ -1,39 +1,42 @@
 package string;
 
-/**
- * String, subString()
- * [startIndex, endIndex), index bound 체크 필요
- * startIndex>=0, endIndex<=length
- * https://programmers.co.kr/learn/courses/30/lessons/60057
- */
 public class Sol60057 {
     public int solution(String s) {
-        int answer = s.length();
-        for (int i = 1; i < s.length(); i++) answer = Integer.min(answer, enc(s, i));
+        int len = s.length();
+        int answer = len;
+
+        for (int i = 1; i <= len / 2; i++)
+            answer = Integer.min(answer, solve(s, i));
 
         return answer;
     }
 
-    private int enc(String s, int size) {
-        int count = 0;
-        String result = "";
-        String sub = s.substring(0, size);
-        // count occurrence
-        for (int i = 0; i < s.length(); i += size) {
-            String candidate;
-            if(i+size>=s.length()) candidate = s.substring(i, s.length());
-            else candidate = s.substring(i, i + size);
-            if (sub.equals(candidate)) count++;
-            else {
-                if (count != 1) result += count;
-                result += sub;
-                sub = candidate;
-                count = 1;
-            }
+    private int solve(String s, int k) {
+        int len = s.length();
+        int size = len / k;
+        String[] split = new String[size];
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < size; i++) {
+            int offSet = i * k;
+            split[i] = s.substring(offSet, offSet + k);
         }
-        if(count!=1) result += count;
-        result += sub;
-//        System.out.println(size + ": " + "result = " + result +" "+result.length());
-        return result.length();
+        int i = 0;
+        while (i < size) {
+            int count = 1;
+            int j;
+
+            for (j = i+1; j < size; j++) {
+                if(!split[i].equals(split[j])) break;
+                count++;
+            }
+
+            if(count>1) sb.append(count);
+            sb.append(split[i]);
+            i = j;
+        }
+
+        sb.append(s.substring(size * k));
+        return sb.length();
     }
 }

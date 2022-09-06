@@ -5,18 +5,18 @@ import java.util.HashSet;
 public class Sol64064 {
     public int solution(String[] userId, String[] bannedId) {
         int answer = 0, userLen = userId.length, banLen = bannedId.length;
-        HashSet<String> map = new HashSet<>();
+        HashSet<String> set = new HashSet<>();
         boolean[] v = new boolean[banLen];
 
         for (int i = 0; i < userLen; i++) {
             for (int j = 0; j < banLen; j++) {
                 if(v[j]) continue;
-                if(map.contains(userId[i])) continue;
+                if(set.contains(userId[i])) continue;
                 if(userId[i].length()!=bannedId[j].length()) continue;
                 char[] uArr = userId[i].toCharArray();
                 char[] bArr = bannedId[j].toCharArray();
                 if(isOk(uArr, bArr)) {
-                    map.add(String.valueOf(uArr));
+                    set.add(String.valueOf(uArr));
                     v[j] = true;
                     answer++;
                 }
@@ -31,7 +31,6 @@ public class Sol64064 {
             if(b[i]=='*') continue;
             if(u[i]!=b[i]) return false;
         }
-        System.out.println("String.valueOf(u) = " + String.valueOf(u));
         return true;
     }
 }

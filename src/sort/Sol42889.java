@@ -10,7 +10,9 @@ public class Sol42889 {
         Arrays.sort(stages);
         int failed = 0;
         for (int i = 0; i < rate.length; i++) {
-            int level = i + 1, passed = 0, yet = 0;
+            int level = i + 1,
+                    passed = 0,
+                    yet = 0;
             for (int j = failed; j < stages.length; j++) {
                 if (stages[j] > level) passed++;
                 else if (stages[j] == level) yet++;

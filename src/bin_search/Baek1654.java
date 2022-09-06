@@ -24,7 +24,6 @@ public class Baek1654 {
         for (int i = 0; i < k; i++) arr[i] = Integer.parseInt(reader.readLine());
         reader.close();
 
-
         sorted = Arrays.stream(arr).sorted().toArray();
         long min = 0;
         long max = sorted[(int) (k - 1)];

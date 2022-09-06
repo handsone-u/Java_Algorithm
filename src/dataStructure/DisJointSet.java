@@ -7,7 +7,7 @@ import java.util.HashMap;
  * Disjoint Set
  * Union-Find
  * 루트를 가리키는 수 저장
- * https://www.acmicpc.net/problem/2042
+ * https://www.acmicpc.net/problem/4195
  */
 public class DisJointSet {
     // i 번째의 root

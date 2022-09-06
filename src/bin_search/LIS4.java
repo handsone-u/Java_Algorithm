@@ -6,32 +6,18 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class LIS4 {
+    static int n, ans;
+    static int[] arr;
+    static final ArrayList<Integer> lis = new ArrayList<>();
 
-    public static void main(String[] args) throws IOException {
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
-
-        Solution object = new Solution();
-        object.gateWay(reader, writer);
-
-        writer.flush();
-        writer.close();
-    }
-}
-
-class Solution{
-    int n,ans;
-    int[] arr;
-    ArrayList<Integer> lis = new ArrayList<>();
-
-    private void solution() {
+    static void solution() {
         lis.add(arr[0]);
 
         for (int i = 1; i < n; i++) {
             if (arr[i] > lis.get(lis.size() - 1)) {
                 lis.add(arr[i]);
             } else {
-                int index = lowerBound(arr[i]);
+                int index = upperBound(arr[i]);
                 lis.set(index, arr[i]);
             }
         }
@@ -39,16 +25,28 @@ class Solution{
         ans = lis.size();
     }
 
-    int lowerBound(int value) {
-
+    static int upperBound(int value) {
         int index = Collections.binarySearch(lis, value);
-        if(index>=0)
-            return index;
-        else
-            return -index - 1;
+        return index >= 0 ?
+                index : -index - 1;
     }
 
-    public void gateWay(BufferedReader reader, BufferedWriter writer) throws IOException {
+    static int binarySearch(int left, int right, int value) {
+        while (left < right) {
+            int mid = (left + right) / 2;
+            if(lis.get(mid)>=value)
+                right = mid;
+            else
+                left = mid + 1;
+        }
+
+        return right;
+    }
+
+    public static void main(String[] args) throws IOException {
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+
         n = Integer.parseInt(reader.readLine());
         arr = Arrays.stream(reader.readLine().split(" "))
                 .mapToInt(Integer::parseInt)
@@ -57,5 +55,7 @@ class Solution{
         solution();
 
         writer.write(String.valueOf(ans));
+        writer.flush();
+        writer.close();
     }
 }

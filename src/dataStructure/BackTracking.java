@@ -25,6 +25,7 @@ public class BackTracking {
         Point point = holes.get(todo);
         for (int i = 1; i <= 9; i++) {
             if(!isPromising(point.x, point.y, i)) continue;
+
             arr[point.x][point.y] = i;
             if(solution(todo+1)) return true;
             arr[point.x][point.y] = 0;

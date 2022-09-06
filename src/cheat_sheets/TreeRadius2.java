@@ -1,13 +1,13 @@
-package dataStructure;
+package cheat_sheets;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TreeRadius {
+public class TreeRadius2 {
     static int n, rMax, rNum;
-    static ArrayList<Node>[] vertex;
     static boolean[] visited;
+    static ArrayList<Node>[] vertex;
 
     static void dfs(int index, int value) {
         visited[index] = true;
@@ -15,8 +15,9 @@ public class TreeRadius {
             rMax = value;
             rNum = index;
         }
+
         for (Node node : vertex[index]) {
-            if (visited[node.index]) continue;
+            if(visited[node.index]) continue;
             dfs(node.index, value + node.distance);
         }
     }
@@ -31,18 +32,12 @@ public class TreeRadius {
         for (int i = 1; i < n + 1; i++)
             vertex[i] = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n-1; i++) {
             int[] tmp = Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            int v = tmp[0];
-            int len = tmp.length;
-            int j = 1;
-            while (j+1 < len) {
-                int to = tmp[j];
-                int d = tmp[j + 1];
-                vertex[v].add(new Node(to, d));
-                j += 2;
-            }
+            vertex[tmp[0]].add(new Node(tmp[1], tmp[2]));
+            vertex[tmp[1]].add(new Node(tmp[0], tmp[2]));
         }
+        rNum = 1;
         dfs(1, 0);
         Arrays.fill(visited, false);
         dfs(rNum, 0);
@@ -52,7 +47,7 @@ public class TreeRadius {
         writer.close();
     }
 
-    static class Node {
+    static class Node{
         int index;
         int distance;
 

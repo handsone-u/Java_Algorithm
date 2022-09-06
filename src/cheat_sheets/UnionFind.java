@@ -1,4 +1,4 @@
-package dataStructure;
+package cheat_sheets;
 
 public class UnionFind {
     int[] parent;

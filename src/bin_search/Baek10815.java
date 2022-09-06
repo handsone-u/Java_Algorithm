@@ -14,7 +14,6 @@ public class Baek10815 {
     public static void main(String[] args) throws Exception{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
-        Scanner scanner = new Scanner(System.in);
 
         n = Integer.parseInt(reader.readLine());
         arr = Arrays.stream(reader.readLine().split(" "))

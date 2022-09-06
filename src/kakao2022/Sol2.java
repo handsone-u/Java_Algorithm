@@ -16,7 +16,7 @@ public class Sol2 {
 
         for (String s : split) {
             System.out.println("s = " + s);
-            if (s.isEmpty() || s == "" || s == " ") continue;
+            if (s.isEmpty() || s.equals("") || s == " ") continue;
             try {
                 long tmp = Long.parseLong(s);
                 if (isPrime(tmp)) cnt++;

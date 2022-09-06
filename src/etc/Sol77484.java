@@ -3,17 +3,39 @@ package etc;
 import java.util.Arrays;
 
 public class Sol77484 {
-    public int[] solution(int[] lottos, int[] win_nums) {
-        int[] answer = {1,6};
+    public int[] solution(int[] lot, int[] win_nums) {
+        int[] answer = new int[2];
+        int min = 0, max = 0, un=0;
 
-        Arrays.sort(lottos);
-        Arrays.sort(win_nums);
-        long zeros = Arrays.stream(lottos).filter(i -> i==0).count();
-        long count = Arrays.stream(win_nums).filter(a -> Arrays.stream(lottos).anyMatch(b -> a == b))
-                .count();
-        answer[0] = (int)(7 - count - zeros);
-        answer[1] = (int)(7 - count);
-
+        for (int i = 0; i < 6; i++) {
+            if(lot[i]==0) {
+                un++;
+                continue;
+            }
+            for (int j = 0; j < 6; j++)
+                if (lot[i] == win_nums[j]) min++;
+        }
+        max = min + un;
+        answer[0] = getLev(max);
+        answer[1] = getLev(min);
+        
         return answer;
+    }
+
+    private int getLev(int match) {
+        switch (match){
+            case 6:
+                return 1;
+            case 5:
+                return 2;
+            case 4:
+                return 3;
+            case 3:
+                return 4;
+            case 2:
+                return 5;
+            default:
+                return 6;
+        }
     }
 }

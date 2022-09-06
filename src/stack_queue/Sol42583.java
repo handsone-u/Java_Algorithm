@@ -1,4 +1,4 @@
-package stackQueuePractice;
+package stack_queue;
 import java.util.*;
 
 public class Sol42583 {

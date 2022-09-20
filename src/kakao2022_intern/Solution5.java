@@ -1,9 +1,8 @@
 package kakao2022_intern;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class Solution {
+public class Solution5 {
     Deque<Deque<Integer>> home = new LinkedList<>();
     Deque<Integer> left = new LinkedList<>();
     Deque<Integer> right = new LinkedList<>();

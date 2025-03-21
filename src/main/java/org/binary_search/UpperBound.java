@@ -12,7 +12,8 @@ public class UpperBound <T extends Comparable<T>>{
     // target 보다 작거나 같은 경우 left를 이동
     while (left < right) {
       int mid = left + (right - left) / 2;
-      if (list.get(mid).compareTo(target) <= 0) {
+      T midValue = list.get(mid);
+      if (midValue.compareTo(target) <= 0) {
         left = mid + 1;
       } else {
         right = mid;
